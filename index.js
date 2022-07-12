@@ -39,4 +39,10 @@ async function replyToComment(comment) {
   dialog("The Enchantress saw me for my fabulously regal ", "You're naught but a decadent dandy! \n\
   Prepare to taste justice! \
   Shovel justice!")
+  dialog("I knew you'd show your face sooner or later. The cerulean coward!", `Stand aside, ${postername}! I've no quarrel with you. I must return to The Tower of Fate!`)
+  dialog("Haven't you tired of this charade? Stay out of this", `You never were one to blindly follow, ${postername}, but The Order and the Enchantress must be stopped!`)
+  dialog("You're headed down a ruinous pat", "The only path I seek leads to The Tower of Fate. And I will reach it.")
+  dialog("Stop your meddling and turn back now", `I will reach her, ${postername}, even if I have to go through you.`)
+
+
 }
