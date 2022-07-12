@@ -1,7 +1,7 @@
 import { Wasteof2Auth, Wasteof2 } from 'wasteof-client'
 
-let username = 'jeffalo';
-let password = 'bacon';
+let username = 'shovelknight';
+let password = process.env['key'];
 const wasteof = new Wasteof2Auth(username, password);
 const wastatic = new Wasteof2();
 
@@ -32,5 +32,11 @@ async function replyToComment(comment) {
 
   /* DO STUFF HERE */
   if (responded) return; // if the bot already responded to the comment, stop the function
-  wasteof.postWallComment(username, "Message content here...", commentid); // reply to the comment
+  function dialog(con, say) {
+    if (content.toLower().includes(con.toLower())) { wasteof.postWallComment(username, say, commentid); break; }; // reply to the comment
+  }
+  dialog("begone from our throne room, knave", "I'm no more an intruder than you! You aren't even a real king!");
+  dialog("The Enchantress saw me for my fabulously regal ", "You're naught but a decadent dandy! \n\
+  Prepare to taste justice! \
+  Shovel justice!")
 }
