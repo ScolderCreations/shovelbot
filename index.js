@@ -36,7 +36,7 @@ async function replyToComment(comment) {
     if (content.toLower().includes(con.toLower())) { wasteof.postWallComment(username, say, commentid); break; }; // reply to the comment
   }
   dialog("begone from our throne room, knave", "I'm no more an intruder than you! You aren't even a real king!");
-  dialog("The Enchantress saw me for my fabulously regal ", "You're naught but a decadent dandy! \n\
+  dialog("The Enchantress saw me for my fabulously regal ", "You're naught but a decadent dandy! \
   Prepare to taste justice! \
   Shovel justice!")
   dialog("I knew you'd show your face sooner or later. The cerulean coward!", `Stand aside, ${postername}! I've no quarrel with you. I must return to The Tower of Fate!`)
