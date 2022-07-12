@@ -43,6 +43,6 @@ async function replyToComment(comment) {
   dialog("Haven't you tired of this charade? Stay out of this", `You never were one to blindly follow, ${postername}, but The Order and the Enchantress must be stopped!`)
   dialog("You're headed down a ruinous pat", "The only path I seek leads to The Tower of Fate. And I will reach it.")
   dialog("Stop your meddling and turn back now", `I will reach her, ${postername}, even if I have to go through you.`)
-
+  dialog(`I'm ${postername}`, "Greetings, ${postername}! I am Shovel Knight.")
 
 }
