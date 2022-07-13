@@ -33,16 +33,16 @@ async function replyToComment(comment) {
   /* DO STUFF HERE */
   if (responded) return; // if the bot already responded to the comment, stop the function
   function dialog(con, say) {
-    if (content.toLower().includes(con.toLower())) { wasteof.postWallComment(username, say, commentid); break; }; // reply to the comment
+    if (content.toLowerCase().includes(con.toLowerCase())) { wasteof.postWallComment(username, say, commentid); return true; }; return false; // reply to the comment
   }
-  dialog("begone from our throne room, knave", "I'm no more an intruder than you! You aren't even a real king!");
-  dialog("The Enchantress saw me for my fabulously regal ", "You're naught but a decadent dandy! \
+  if (!dialog("begone from our throne room, knave", "I'm no more an intruder than you! You aren't even a real king!")) return;
+  if (!dialog("The Enchantress saw me for my fabulously regal ", "You're naught but a decadent dandy! \
   Prepare to taste justice! \
-  Shovel justice!")
+  Shovel justice!")) return;
   dialog("I knew you'd show your face sooner or later. The cerulean coward!", `Stand aside, ${postername}! I've no quarrel with you. I must return to The Tower of Fate!`)
   dialog("Haven't you tired of this charade? Stay out of this", `You never were one to blindly follow, ${postername}, but The Order and the Enchantress must be stopped!`)
   dialog("You're headed down a ruinous pat", "The only path I seek leads to The Tower of Fate. And I will reach it.")
   dialog("Stop your meddling and turn back now", `I will reach her, ${postername}, even if I have to go through you.`)
-  dialog(`I'm ${postername}`, "Greetings, ${postername}! I am Shovel Knight.")
+  dialog(`I'm ${postername}`, `Greetings, ${postername}! I am Shovel Knight.`)
 
 }

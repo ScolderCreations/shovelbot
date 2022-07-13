@@ -4,5 +4,8 @@
   "type": "module",
   "dependencies": {
     "wasteof-client": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node ./index.js"
   }
 }
