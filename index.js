@@ -1,4 +1,5 @@
 import { Wasteof2Auth, Wasteof2 } from 'wasteof-client'
+import { writeFileSync, readFileSync } from 'fs'
 
 let username = 'shovelknight';
 let password = process.env['key'];
@@ -19,30 +20,49 @@ async function replyToComment(comment) {
   if (!comment) return;
   let postername = comment.poster.name; // username the one leaving the comment
   let posterid = comment.poster.id; // id of the one leaving the comment
-  let content = comment.content; // content of the comment
+  let content = String(comment.content); // content of the comment
   let commentid = comment._id; // id of the comment
   let time = comment.time; // timestamp of the comment
-  let responded = false; // if the bot already responded
-
- 	await wastatic.getRepliesToComment(commentid, 0)
+  let responded = comment.hasReplies; // if the bot already responded
+  console.log(comment)
+ 	/*await wastatic.getRepliesToComment(commentid, 0)
   .then(data => {
     if (!data[0]) return;
     if (data[0].poster.name == username) responded = true;
   })
+*/
 
+  var list = Object({
+    "i'm %%": "<p>Welcome, %%! I am Shovel Knight!</p>",
+    "you heard of among us": "<p>Among Us? What do you mean? Am I missing a joke?</p>",
+    "hee! leave me alone": "<p>Show yourself, <b>Plague Knight</b>! Your trickery will not stop me.</p>",
+    "knew you'd show your face sooner or later. The cerulean": "<p>Stand aside, %%! I've no quarrel with you. I must return to The Tower of Fate!</p>",
+    "howdy bot": "Hello!",
+    "Haven't you tired of this charade? Stay": "You never were one to blindly follow, %%, but The Order and the Enchantress must be stopped!",
+    "You're headed down a ruinous path!": "The only path I seek leads to The Tower of Fate. And I will reach it."
+  })
+
+  if (responded) return;
   /* DO STUFF HERE */
-  if (responded) return; // if the bot already responded to the comment, stop the function
-  function dialog(con, say) {
-    if (content.toLowerCase().includes(con.toLowerCase())) { wasteof.postWallComment(username, say, commentid); return true; }; return false; // reply to the comment
+  for (let con of Object.keys(list)) {
+    if (content.toLowerCase().indexOf(con.toLowerCase().replace("%%", postername)) > 0) { 
+      console.log("Detected phrase: " + con); 
+      if (!(readFileSync("./history.bin").indexOf(commentid) > 0)) {
+      wasteof.postWallComment(username, list[con].replace("%%", postername), commentid); 
+      writeFileSync("./history.bin", commentid);
+      }
+      return; 
+    };
   }
-  if (!dialog("begone from our throne room, knave", "I'm no more an intruder than you! You aren't even a real king!")) return;
-  if (!dialog("The Enchantress saw me for my fabulously regal ", "You're naught but a decadent dandy! \
-  Prepare to taste justice! \
-  Shovel justice!")) return;
-  dialog("I knew you'd show your face sooner or later. The cerulean coward!", `Stand aside, ${postername}! I've no quarrel with you. I must return to The Tower of Fate!`)
-  dialog("Haven't you tired of this charade? Stay out of this", `You never were one to blindly follow, ${postername}, but The Order and the Enchantress must be stopped!`)
-  dialog("You're headed down a ruinous pat", "The only path I seek leads to The Tower of Fate. And I will reach it.")
-  dialog("Stop your meddling and turn back now", `I will reach her, ${postername}, even if I have to go through you.`)
-  dialog(`I'm ${postername}`, `Greetings, ${postername}! I am Shovel Knight.`)
-
 }
+
+import express from 'express'
+
+const app = express()
+const port = 3000
+app.get('/', (req, res) => {
+  res.send(String(Math.random()))
+})
+app.listen(port, () => {
+  console.log(`server pinged!`)
+})
