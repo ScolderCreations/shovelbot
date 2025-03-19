@@ -3,7 +3,7 @@
   "description": "A simple starter kit for a wasteof.money bot",
   "type": "module",
   "dependencies": {
-    "express": "^4.18.1",
+    "express": "^4.21.2",
     "wasteof-client": "^3.0.0"
   },
   "scripts": {
